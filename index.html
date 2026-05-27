@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Your Eyes Only</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body, html { width: 100%; height: 100%; background: #fce4ec; color: #333; overflow-x: hidden; }
+        
+        .screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 20px; transition: 0.5s; z-index: 10; }
+        .hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        
+        .card { background: white; padding: 30px; border-radius: 20px; text-align: center; max-width: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        button { background: #ec407a; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: 0.3s; }
+        button:hover { background: #d81b60; }
+        
+        .pin-inputs { display: flex; gap: 10px; justify-content: center; margin: 20px 0; }
+        .pin-inputs input { width: 50px; height: 50px; text-align: center; font-size: 24px; border: 2px solid #ec407a; border-radius: 10px; }
+        
+        .letter-paper { background: #fffaf0; padding: 30px; border-radius: 10px; max-height: 80vh; overflow-y: auto; text-align: left; line-height: 1.6; }
+        .collage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 500px; }
+        .polaroid { background: white; padding: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .polaroid img { width: 100%; height: 150px; object-fit: cover; }
+
+        /* Falling Elements - Increased Size (40px) */
+        .falling-element { position: fixed; top: -50px; z-index: 1; pointer-events: none; animation: fall linear infinite; font-size: 40px; }
+        @keyframes fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <iframe id="bg-music" width="0" height="0" src="https://www.youtube.com/embed/tj00X_8j8U4?autoplay=1&loop=1&playlist=tj00X_8j8U4" frameborder="0" allow="autoplay"></iframe>
+
+    <div class="screen" id="screen1">
+        <div class="card">
+            <h2>Welcome, My Love 🎀</h2>
+            <p>Please turn up your volume for a special surprise.</p>
+            <button onclick="next('screen1', 'screen2')">CONTINUE</button>
+        </div>
+    </div>
+
+    <div class="screen hidden" id="screen2">
+        <div class="card">
+            <h3>Enter the PIN to open your letter</h3>
+            <div class="pin-inputs">
+                <input type="text" maxlength="1" class="p-in">
+                <input type="text" maxlength="1" class="p-in">
+                <input type="text" maxlength="1" class="p-in">
+                <input type="text" maxlength="1" class="p-in">
+            </div>
+            <button onclick="checkPin()">ENTER</button>
+        </div>
+    </div>
+
+    <div class="screen hidden" id="screen3">
+        <div class="card letter-paper">
+            <h3 style="text-align: center;">DEAR MY LADY</h3>
+            <p>Good morning my lovely preety girl 👀🎀✨. this is the another letter 💌 i want to give it to you. since we have spent two months with loving, fighting and little understanding each other 👀✨🎀💌.</p>
+            <br>
+            <p>As today is 28 may, A very special day to us thr we would never forget. Honestly, I don't know how our love seems like after years✨👀❤️🥺, But i will wait years to win you 🎀✨. and one gonna stop me Bcz u r mine only mine 🎀✨🥺.</p>
+            <br>
+            <p>you are the first girl who wishes me for birthday even my birthday was already gone. I will never forget that moment. doesn't matter how u treat me now, but the treatment you given me in my past time is god gifted for me 🥹🎀✨🥺. And besides my anger, I will always respect you for what you given me with ur efforts.</p>
+            <br>
+            <p>I will always love you Will always wait for u. I know I doesn't look handsome as u may like. I am not as much as understanding. I know u deserve very and very better person than me who have many talents and understands you, but you know I think I love you the most 🥺✨🫶🏻🥹. if i kept and anger beside, no one can love you as I love you.</p>
+            <br>
+            <p>with ending the letter i just want to tell, i am not suspecting on you, i just become insecure of losing u and this this happens that day may be last day on earth for me 🥺🎀✨❤️. LOVE YOU SOOOO MUCHHHHHH 💗🎀💋💌 AS BUDDY AS BSF AS GF AS PARTNER AS WIFE AS MY WHOLE WORLD 🥹✨❤️💜💝💌💋🫶🏻</p>
+            <br>
+            <p><strong>YOUR LOVER:- VIKRAM KUMAR<br>28th MAY 2026</strong></p>
+            <center><button onclick="next('screen3', 'screen4')">VIEW MEMORIES 📸</button></center>
+        </div>
+    </div>
+
+    <div class="screen hidden" id="screen4">
+        <div class="card" style="width: 100%;">
+            <h3>Our Memories</h3>
+            <div class="collage-grid">
+                <div class="polaroid"><img src="1000011937.png"></div>
+                <div class="polaroid"><img src="1000011936.png"></div>
+                <div class="polaroid"><img src="1000011933.png"></div>
+                <div class="polaroid"><img src="1000011934.png"></div>
+                <div class="polaroid"><img src="1000011935.png"></div>
+                <div class="polaroid"><img src="1000011940.png"></div>
+                <div class="polaroid"><img src="1000011939.png"></div>
+                <div class="polaroid"><img src="1000011929.png"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animation
+        function createFallingElements() {
+            const symbols = ['❤️', '🍁', '✨', '💖'];
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'falling-element';
+                el.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 10000);
+            }, 800);
+        }
+        createFallingElements();
+
+        // Navigation
+        function next(curr, next) {
+            document.getElementById(curr).classList.add('hidden');
+            document.getElementById(next).classList.remove('hidden');
+        }
+        function checkPin() {
+            let pin = "";
+            document.querySelectorAll('.p-in').forEach(i => pin += i.value);
+            if(pin === "2026") next('screen2', 'screen3');
+            else alert("Wrong password, try 2026!");
+        }
+        document.querySelectorAll('.p-in').forEach((input, idx, arr) => {
+            input.oninput = () => { if(input.value && arr[idx+1]) arr[idx+1].focus(); }
+        });
+    </script>
+</body>
+</html>
